@@ -1,5 +1,9 @@
 package com.assessment.newsarticles.ui
 
+import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.assessment.newsarticles.BR
 import com.assessment.newsarticles.R
 import com.assessment.newsarticles.databinding.ActivityMainBinding
@@ -16,5 +20,13 @@ class NewsArticlesActivity : BaseActivity<ActivityMainBinding, NewsArticlesViewM
 
     override val viewModel: NewsArticlesViewModel
         get() = getViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // configure action bar.
+        val navController = findNavController(R.id.fragment_navigation_host)
+        setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+    }
 
 }
