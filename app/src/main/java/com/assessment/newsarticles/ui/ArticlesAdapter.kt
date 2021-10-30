@@ -2,12 +2,11 @@ package com.assessment.newsarticles.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.assessment.newsarticles.data.model.Article
 import com.assessment.newsarticles.databinding.RowItemArticleBinding
+import com.assessment.newsarticles.ui.base.BaseRecyclerViewAdapter
 
-class ArticlesAdapter(private val items: MutableList<Article>) :
-    RecyclerView.Adapter<ArticlesAdapter.MyViewHolder>() {
+class ArticlesAdapter(items: MutableList<Article>) : BaseRecyclerViewAdapter<Article>(items) {
 
     override fun getItemCount() = items.size
 
@@ -21,11 +20,12 @@ class ArticlesAdapter(private val items: MutableList<Article>) :
         )
     }
 
-    data class MyViewHolder(val binding: RowItemArticleBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class MyViewHolder(val binding: RowItemArticleBinding) : BaseViewHolder(binding.root) {
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.article = items[position]
-        holder.binding.executePendingBindings()
+        override fun onBind(position: Int) {
+            binding.article = items[position]
+            binding.executePendingBindings()
+        }
     }
+
 }

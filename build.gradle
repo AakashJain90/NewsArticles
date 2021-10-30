@@ -24,4 +24,6 @@ ext {
     navigationVersion = '2.3.5'
     koinVersion = '3.1.2'
     glideVersion = '4.12.0'
+    lifecycle_version = '2.3.1'
+    retrofit_version = '2.9.0'
 }
