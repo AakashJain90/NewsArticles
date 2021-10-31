@@ -1,6 +1,7 @@
 package com.assessment.newsarticles.ui
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.assessment.newsarticles.R
@@ -53,4 +54,11 @@ class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseVi
         }
 
     }
+
+    fun articleShareIntent(context: Context?) = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, context?.getString(R.string.article_link))
+        putExtra(Intent.EXTRA_TEXT, articleSelected?.url)
+    }
+
 }

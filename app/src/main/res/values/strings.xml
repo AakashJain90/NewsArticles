@@ -5,4 +5,7 @@
     <string name="error_fetching_articles">Error while fetching the articles.</string>
     <string name="wait_fetching_top_stories">Wait while fetching the top stories.</string>
     <string name="no_results">No Results Found.</string>
+    <string name="share_article">Share Article</string>
+    <string name="article_link">Article Link</string>
+    <string name="share_via">Share via</string>
 </resources>
