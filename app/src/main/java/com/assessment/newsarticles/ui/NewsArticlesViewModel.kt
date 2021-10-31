@@ -9,6 +9,7 @@ import com.assessment.newsarticles.data.model.Article
 import com.assessment.newsarticles.data.model.ArticlesInternalResponse
 import com.assessment.newsarticles.data.repository.IArticleRepository
 import com.assessment.newsarticles.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseViewModel() {
@@ -20,17 +21,17 @@ class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseVi
     var articleSelected: Article? = null
 
     init {
-        viewModelScope.launch {
-            isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            isLoading.postValue(true)
 
             val topStories = repository.getTopStories()
             topStoriesArticlesResponse = topStories
 
-            isLoading.value = false
+            isLoading.postValue(false)
 
             when (topStories) {
-                is ArticlesInternalResponse.Fail -> toastMsg.value = topStories.errorMsg
-                is ArticlesInternalResponse.Success -> articlesList.value = topStories.listArticles
+                is ArticlesInternalResponse.Fail -> toastMsg.postValue(topStories.errorMsg)
+                is ArticlesInternalResponse.Success -> articlesList.postValue(topStories.listArticles)
             }
         }
     }
