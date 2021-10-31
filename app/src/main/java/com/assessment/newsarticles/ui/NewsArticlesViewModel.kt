@@ -16,6 +16,8 @@ class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseVi
 
     val articlesList = MutableLiveData<List<Article>>()
 
+    var articleSelected: Article? = null
+
     init {
         viewModelScope.launch {
             isLoading.value = true

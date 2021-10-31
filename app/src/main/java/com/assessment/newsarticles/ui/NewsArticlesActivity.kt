@@ -29,4 +29,9 @@ class NewsArticlesActivity : BaseActivity<ActivityNewsArticlesBinding, NewsArtic
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragment_navigation_host)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
 }

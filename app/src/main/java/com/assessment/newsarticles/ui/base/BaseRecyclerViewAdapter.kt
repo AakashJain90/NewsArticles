@@ -20,8 +20,7 @@ abstract class BaseRecyclerViewAdapter<T>(
         items.clear()
     }
 
-    abstract class BaseViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         abstract fun onBind(position: Int)
     }
 

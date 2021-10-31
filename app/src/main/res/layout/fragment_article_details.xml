@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.assessment.newsarticles.data.model.Article" />
+
+        <variable
+            name="viewModel"
+            type="com.assessment.newsarticles.ui.NewsArticlesViewModel" />
+    </data>
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:context=".presentation.main.article_details.ArticleDetailsFragment">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@{article.title}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="A very very long text like A quick brown fox jumps over lazy dog." />
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="@{article.byline}"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                tools:text="By JULIAN E. BARNES" />
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:imageUrl="@{article.multimedia.get(0).url}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="ContentDescription"
+                tools:layout_editor_absoluteX="0dp"
+                tools:src="@android:drawable/ic_menu_mapmode" />
+
+            <TextView
+                android:id="@+id/tv_abstract"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="@{article.abstract}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="A quick brown jumps is very lazy and does not jumps." />
+
+            <TextView
+                android:id="@+id/tv_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="@{article.url}"
+                android:textSize="12sp"
+                tools:text="https://www.articles.com" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

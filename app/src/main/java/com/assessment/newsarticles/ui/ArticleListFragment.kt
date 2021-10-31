@@ -8,12 +8,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.assessment.newsarticles.BR
 import com.assessment.newsarticles.R
+import com.assessment.newsarticles.data.model.Article
 import com.assessment.newsarticles.databinding.FragmentArticleListBinding
 import com.assessment.newsarticles.ui.base.BaseFragment
+import com.assessment.newsarticles.ui.base.NavigationCommand
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class ArticleListFragment : BaseFragment<FragmentArticleListBinding, NewsArticlesViewModel>(),
-    SearchView.OnQueryTextListener {
+    SearchView.OnQueryTextListener, ArticlesAdapter.IArticleSelectedListener {
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -34,7 +36,8 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, NewsArticle
 
         // recycle view setup.
         viewDataBinding().rvArticles.layoutManager = LinearLayoutManager(this.context)
-        viewDataBinding().rvArticles.adapter = ArticlesAdapter(mutableListOf())
+        viewDataBinding().rvArticles.adapter = ArticlesAdapter(mutableListOf(), this)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -51,6 +54,11 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, NewsArticle
     override fun onQueryTextChange(newText: String?): Boolean {
         viewModel.searchArticles(newText, context)
         return false
+    }
+
+    override fun onArticleSelected(article: Article) {
+        viewModel.articleSelected = article
+        navigate(NavigationCommand.To(ArticleListFragmentDirections.toArticleDetailsFragment()))
     }
 
 }
