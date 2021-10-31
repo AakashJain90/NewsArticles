@@ -2,6 +2,7 @@ package com.assessment.newsarticles.ui
 
 import android.content.Context
 import android.content.Intent
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.assessment.newsarticles.R
@@ -14,9 +15,11 @@ import kotlinx.coroutines.launch
 
 class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseViewModel() {
 
-    private var topStoriesArticlesResponse: ArticlesInternalResponse? = null
+    private var _topStoriesArticlesResponse: ArticlesInternalResponse? = null
 
-    val articlesList = MutableLiveData<List<Article>>()
+    // livedata for articles listing.
+    private val _articlesList = MutableLiveData<List<Article>>()
+    val articlesList: LiveData<List<Article>> = _articlesList
 
     var articleSelected: Article? = null
 
@@ -25,13 +28,13 @@ class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseVi
             isLoading.postValue(true)
 
             val topStories = repository.getTopStories()
-            topStoriesArticlesResponse = topStories
+            _topStoriesArticlesResponse = topStories
 
             isLoading.postValue(false)
 
             when (topStories) {
                 is ArticlesInternalResponse.Fail -> toastMsg.postValue(topStories.errorMsg)
-                is ArticlesInternalResponse.Success -> articlesList.postValue(topStories.listArticles)
+                is ArticlesInternalResponse.Success -> _articlesList.postValue(topStories.listArticles)
             }
         }
     }
@@ -42,12 +45,12 @@ class NewsArticlesViewModel(private val repository: IArticleRepository) : BaseVi
             return
         }
 
-        if (topStoriesArticlesResponse!! is ArticlesInternalResponse.Fail) {
+        if (_topStoriesArticlesResponse!! is ArticlesInternalResponse.Fail) {
             toastMsg.value = context?.getString(R.string.no_results)
         } else {
             val listArticles =
-                (topStoriesArticlesResponse!! as ArticlesInternalResponse.Success).listArticles
-            articlesList.value = if (filterText.isNullOrEmpty()) {
+                (_topStoriesArticlesResponse!! as ArticlesInternalResponse.Success).listArticles
+            _articlesList.value = if (filterText.isNullOrEmpty()) {
                 listArticles
             } else {
                 listArticles.filter { it.title.contains(filterText, true) }
