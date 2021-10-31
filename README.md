@@ -1,13 +1,13 @@
 # NewsArticles
 
 ## Details
-- MVVM Architecture Used
-- Koin Used for DI
-- Unit-Tests added
+- MVVM Architecture
+- Koin library for DI
+- Unit-Tests Impl using Mockito and JUnit
+- ActionBar 
+- Databinding library
+- Retrofit library for Networking
 - App targeted to latest Android Version - 12
-- ActionBar used
-- Databinding library used
-- Retrofit for Networking
 
 ## Screenshots
 Article Loadiing
@@ -17,11 +17,14 @@ Article Loadiing
 Articles Loaded
 ![Article Loaded](/screenshots/2_ArticlesLoaded.png?raw=true "Optional Title")
 
+
 Search Expanded
 ![Search Expanded](/screenshots/3_SearchExpanded.png?raw=true "Optional Title")
 
+
 Search Results
 ![Search Results](/screenshots/4_SearchResults.png?raw=true "Optional Title")
+
 
 Article Details
 ![Article Details](/screenshots/5_ArticleDetails.png?raw=true "Optional Title")
