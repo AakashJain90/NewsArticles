@@ -49,6 +49,7 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, NewsArticle
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.searchArticles(newText, context)
         return false
     }
 
