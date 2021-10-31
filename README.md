@@ -1,5 +1,14 @@
 # NewsArticles
 
+## Details
+- MVVM Architecture Used
+- Koin Used for DI
+- Unit-Tests added
+- App targeted to latest Android Version - 12
+- ActionBar used
+- Databinding library used
+- Retrofit for Networking
+
 ## Screenshots
 Article Loadiing
 ![Article Loading](/screenshots/1_ArticlesLoading.png?raw=true "Article Loading")
